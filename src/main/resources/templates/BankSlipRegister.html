@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cadastro de título</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+
+	<nav class="navbar bg-body-tertiary">
+		<div class="container-fluid">
+			<span class="navbar-brand mb-0 h1">Estudos</span>
+		</div>
+	</nav>
+
+	<div class="m-3 alert  alert-dismissible fade show" role="alert" th:classappend="${class}" th:if="${!#strings.isEmpty(message)}">
+		<span th:text="${message}"></span>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+
+	<div >
+		<div class="border rounded-3 m-3">
+			<nav class="navbar bg-body-tertiary rounded-top">
+				<div class="container-fluid">
+					<span class="navbar-brand mb-0 h1">Novo título</span>
+				</div>
+			</nav>
+			<form class=" p-5" method="post" action="/bankslip/save">
+
+				<div class="mb-3">
+					<label for="description" class="form-label">Descrição</label>
+					<input type="text" class="form-control" id="description" name="description">
+				</div>
+				<div class="mb-3">
+					<label for="dueDate" class="form-label">Data de vencimento</label>
+					<input type="date" class="form-control" id="dueDate" name="dueDate">
+				</div>
+				<div class="mb-3">
+					<label for="amount" class="form-label">Valor</label>
+					<input type="number" class="form-control" id="amount" name="amount" step=".01" min="0">
+				</div>
+				<div class="mb-3">
+					<label for="status" class="form-label">Status</label>
+					<select class="form-select" id="status" name="status">
+						<option th:each="individualStatus : ${statusBankSlip}" th:value="${individualStatus.name}" th:text="${individualStatus.description}"></option>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">Salvar</button>
+			</form>
+		</div>
+
+	</div>
+
+
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery-3.6.3.js"></script>
+</body>
+
+</html>
